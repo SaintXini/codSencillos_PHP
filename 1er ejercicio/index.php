@@ -16,48 +16,44 @@ $people = [
 
 ];
 
-$ageRanges = [
-    'work' => [22, 30]
-];
-
-$age_People = 18;
-$aduls = [];
-$menores = [];
+$age_minor = 0;
+$age_adult = 0;
+$the_work = [];
 
 foreach ($people as $person) {
-    if ($person['age'] >= $age_People) {
-        $adults[] = $person['name'];
-    } else {
-        $minors[] = $person['name'];
+    $age = $person['age'];
+    $name = $person['name'];
+
+    if ($age >= 18) {
+        $age_adult++;
+        $mayores[] = $name; 
+    } 
+    else {
+        $age_minor++;
+        $menores[] = $name;
     }
 }
-
-echo "Mayores de edad:<br>";
-foreach ($adults as $adult) {
-    echo "- $adult<br>";
-}
-
-echo "<br>Menores de edad:<br>";
-foreach ($minors as $minor) {
-    echo "- $minor<br>";
-}
-
-$peopleByAgeRange = [];
 
 foreach ($people as $person) {
-    foreach ($ageRanges as $rangeName => $range) {
-        if ($person['age'] >= $range[0] && ($person['age'] <= $range[1] || $range[1] === null)) {
-            $peopleByAgeRange[$rangeName][] = $person['name'];
-            break; 
-        }
+    $age = $person['age'];
+    $name = $person['name'];
+
+    if ($age >= 22 && $age <= 30) {
+        $the_work[] = $name;
     }
 }
 
+echo "Personas mayores de edad:<br>";
+foreach ($mayores as $nombre) {
+    echo "- $nombre<br>";
+}
 
-foreach ($peopleByAgeRange as $rangeName => $names) {
-    echo "<br>Aptos para laborar:<br>";
-    foreach ($names as $name) {
-        echo "- $name<br>";
-    }
-    echo "\n";
+echo "<br>Personas menores de edad:<br>";
+foreach ($menores as $nombre) {
+    echo "- $nombre<br>";
+}
+
+echo "<br>Aptas para laborar:<br>";
+foreach ($the_work as $nombre) {
+    echo "- $nombre<br>";
 }
